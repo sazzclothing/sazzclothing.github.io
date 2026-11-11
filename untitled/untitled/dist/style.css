@@ -1,0 +1,248 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #080808;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 7%;
+  border-bottom: 1px solid #292929;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.bag {
+  background: white;
+  color: black;
+  border: none;
+  padding: 12px 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 570px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8%;
+  background:
+    linear-gradient(90deg, #000 5%, #000b 50%, #0004),
+    url('https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1800')
+    center/cover;
+}
+
+.tag {
+  letter-spacing: 5px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.hero h1 {
+  font-size: clamp(55px, 10vw, 105px);
+  line-height: .95;
+  margin: 25px 0;
+  font-weight: 900;
+}
+
+.hero p {
+  color: #ccc;
+  margin-bottom: 28px;
+}
+
+.btn {
+  display: inline-block;
+  background: white;
+  color: black;
+  padding: 15px 28px;
+  text-decoration: none;
+  font-weight: bold;
+  width: fit-content;
+}
+
+section {
+  padding: 75px 7%;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 35px;
+  letter-spacing: 2px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.product {
+  background: #111;
+  padding-bottom: 20px;
+}
+
+.product img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+
+.product h3 {
+  margin: 17px 15px 8px;
+}
+
+.product p {
+  margin: 0 15px 15px;
+  color: #aaa;
+}
+
+.product button {
+  margin: 0 15px;
+  padding: 12px 18px;
+  background: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.about {
+  background: #f4f4f4;
+  color: #111;
+  text-align: center;
+}
+
+.about p {
+  max-width: 550px;
+  margin: 20px auto;
+  line-height: 1.8;
+  color: #555;
+}
+
+footer {
+  padding: 45px 7%;
+  text-align: center;
+  border-top: 1px solid #333;
+  color: #999;
+}
+
+footer a {
+  display: inline-block;
+  color: white;
+  margin: 12px;
+}
+
+#bag-items {
+  display: none;
+  position: fixed;
+  top: 85px;
+  right: 20px;
+  width: min(350px, 90vw);
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #181818;
+  color: white;
+  padding: 20px;
+  z-index: 1001;
+  border: 1px solid #444;
+}
+
+.bag-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #444;
+}
+
+.remove-btn,
+.checkout-btn {
+  padding: 9px 12px;
+  margin-top: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.remove-btn {
+  background: #444;
+  color: white;
+}
+
+.checkout-btn {
+  background: white;
+  color: black;
+  width: 100%;
+}
+
+#message {
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  background: white;
+  color: black;
+  padding: 12px;
+  display: none;
+  z-index: 1002;
+}
+
+@media(max-width:700px) {
+  header {
+    padding: 18px 5%;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  nav {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-size: 11px;
+  }
+
+  .logo {
+    font-size: 25px;
+  }
+
+  .hero {
+    min-height: 470px;
+  }
+
+  section {
+    padding: 55px 5%;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .product h3 {
+    font-size: 14px;
+  }
+}
