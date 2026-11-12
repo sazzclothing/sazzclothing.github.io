@@ -70,7 +70,7 @@ function displayProducts() {
      
 <div class="colour-options">
   ${item.colours.length ? `
-    <p class="colour-heading">AVAILABLE COLOURS</p>
+    <p class="colour-heading"> OTHER AVAILABLE COLOURS</p>
     <div class="colour-list">
       ${item.colours.map(colour => `
         <button
