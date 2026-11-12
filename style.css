@@ -450,3 +450,25 @@ footer a {
   animation: none !important;
   transform: none !important;
 }
+
+
+/* FIX: REMOVE DUPLICATED TEXT IN HERO BACKGROUND */
+.hero {
+  background-size: 200% auto !important;
+  background-position: right center !important;
+  background-repeat: no-repeat !important;
+  overflow: hidden;
+}
+
+.hero h1,
+.hero p,
+.hero .btn {
+  position: relative;
+  z-index: 2;
+  text-shadow: none !important;
+}
+
+.hero::before,
+.hero::after {
+  content: none !important;
+}
