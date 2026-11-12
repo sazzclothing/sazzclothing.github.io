@@ -67,25 +67,31 @@ function displayProducts() {
 
       <p>KSh ${item.price.toLocaleString()}</p>
 
-      <div class="colour-options">
-        ${item.colours.length ? `
-          <p class="colour-heading">AVAILABLE COLOURS</p>
+     
+<div class="colour-options">
+  ${item.colours.length ? `
+    <p class="colour-heading">AVAILABLE COLOURS</p>
+    <div class="colour-list">
+      ${item.colours.map(colour => `
+        <button
+          type="button"
+          class="colour-option ${selectedColours[index] === colour ? "selected" : ""}"
+          data-product="${index}"
+          data-colour="${colour}"
+          title="${colour}"
+          style="background-color: ${
+            colour === "Charcoal Grey" ? "#444" :
+            colour.toLowerCase()
+          };">
+        </button>
+      `).join("")}
+    </div>
+    <p class="selected-colour">
+      ${selectedColours[index] || "Choose a colour"}
+    </p>
+  ` : ""}
+</div>
 
-          <div class="colour-list">
-            ${item.colours.map(colour => `
-              <button
-                type="button"
-                class="colour-option ${
-                  selectedColours[index] === colour ? "selected" : ""
-                }"
-                data-product="${index}"
-                data-colour="${colour}">
-                ${colour}
-              </button>
-            `).join("")}
-          </div>
-        ` : ""}
-      </div>
 
       <button class="add-bag-button" data-add="${index}">
         ADD TO BAG
