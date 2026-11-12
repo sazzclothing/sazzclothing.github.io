@@ -224,7 +224,7 @@ nav a:hover {
 
 #cart {
   position: absolute !important;
-  top: 50px !important;
+  top: 10px !important;
   right: 20px !important;
   bottom: auto !important;
   left: auto !important;
