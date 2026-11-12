@@ -223,7 +223,7 @@ nav a:hover {
 /* SHOPPING BAG */
 
 #cart {
-  position: fixed;
+  position: absolute;
   top: 130px;
   right: 20px;
   z-index: 1000;
