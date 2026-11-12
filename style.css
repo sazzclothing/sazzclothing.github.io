@@ -364,3 +364,51 @@ footer a {
     grid-template-columns: 1fr;
   }
 }
+
+/* SAZZ HOMEPAGE REDESIGN */
+.hero {
+  min-height: calc(100vh - 120px) !important;
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  text-align: left !important;
+  padding: 80px 5% !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.25)
+    ),
+    url("hero.jpg") center center / cover no-repeat !important;
+}
+
+.hero h1 {
+  text-align: left !important;
+  max-width: 850px;
+  font-size: clamp(55px, 7vw, 110px) !important;
+  line-height: 1.05 !important;
+  margin: 30px 0 !important;
+}
+
+.hero p {
+  text-align: left !important;
+}
+
+.hero .btn {
+  margin-top: 25px;
+  align-self: flex-start;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 75vh !important;
+    padding: 50px 6% !important;
+  }
+
+  .hero h1 {
+    font-size: 48px !important;
+  }
+}
