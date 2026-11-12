@@ -123,22 +123,23 @@ function updateCount() {
 }
 
 // ADD TO BAG
+
 function addToCart(index) {
   const item = items[index];
 
-  if (item.colours.length && !selectedColours[index]) {
-    showMessage("Please select a colour first!");
-    return;
-  }
-
   cart.push({
     ...item,
-    selectedColour: selectedColours[index] || ""
+    selectedColour: selectedColours[index] || "Not selected"
   });
 
   updateCount();
   showMessage(item.name + " added to bag!");
+
+  if (document.getElementById("bag-items").style.display === "block") {
+    renderBag();
+  }
 }
+
 
 // OPEN BAG
 
