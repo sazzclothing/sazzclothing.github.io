@@ -431,3 +431,22 @@ footer a {
   animation: none !important;
   transform: none !important;
 }
+
+/* FIX DUPLICATE / GHOST TEXT */
+.hero,
+.hero * {
+  text-shadow: none !important;
+}
+
+.hero h1::before,
+.hero h1::after,
+.hero p::before,
+.hero p::after {
+  content: none !important;
+  display: none !important;
+}
+
+.hero h1 {
+  animation: none !important;
+  transform: none !important;
+}
