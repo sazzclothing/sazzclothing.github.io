@@ -1,250 +1,366 @@
 
-const items = [
-  {
-    name: "Cap",
-    price: 800,
-    image: "",
-    colours: []
-  },
-  {
-    name: "Crop Top",
-    price: 700,
-    image: "https://github.com/kagarijr/sazz-product-images/blob/main/Crop-top.jpg?raw=true",
-    colours: ["Grey"]
-  },
-  {
-    name: "T-Shirt",
-    price: 850,
-    image: "",
-    colours: ["Brown", "Grey"]
-  },
-  {
-    name: "Short",
-    price: 700,
-    image: "",
-    colours: ["Brown", "Grey"]
-  },
-  {
-    name: "Sweatpant",
-    price: 1200,
-    image: "https://github.com/kagarijr/sazz-product-images/blob/main/Sweatpant.jpg?raw=true",
-    colours: ["Black", "Charcoal Grey", "Pink"]
-  },
-  {
-    name: "Hoodie",
-    price: 1500,
-    image: "https://github.com/kagarijr/sazz-product-images/blob/main/Hoodie.jpg?raw=true",
-    colours: ["Grey", "Pink"]
-  },
-  {
-    name: "Two-Piece",
-    price: 2100,
-    image: "https://github.com/kagarijr/sazz-product-images/blob/main/Two-piece.jpg?raw=true",
-    colours: ["Grey", "Pink"]
+/* =========================
+   SAZZ - MAIN STYLES
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #080808;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+
+header {
+  width: 100%;
+  padding: 22px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #080808;
+  border-bottom: 1px solid #292929;
+}
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 5px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+nav a:hover {
+  color: #aaa;
+}
+
+/* HERO SECTION */
+
+.hero {
+  min-height: 75vh;
+  padding: 80px 7%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #111;
+}
+
+.hero h1 {
+  font-size: clamp(45px, 9vw, 100px);
+  font-weight: 900;
+  letter-spacing: 8px;
+}
+
+.hero p {
+  margin-top: 18px;
+  color: #bbb;
+  letter-spacing: 3px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 30px;
+  background: white;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: #ccc;
+}
+
+/* SHOP SECTION */
+
+#shop {
+  padding: 70px 7%;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 35px;
+  letter-spacing: 4px;
+  margin-bottom: 45px;
+}
+
+#products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 35px 22px;
+}
+
+/* PRODUCT CARDS */
+
+.product {
+  background: #141414;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #292929;
+}
+
+.product img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  background: #222;
+}
+
+.product-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  color: #888;
+  font-size: 22px;
+}
+
+.product h3 {
+  margin-top: 18px;
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+
+.product > p {
+  margin-top: 9px;
+  color: #ccc;
+}
+
+/* COLOUR OPTIONS */
+
+.product .colour-options {
+  display: block;
+  width: 100%;
+  margin: 18px 0 20px;
+  position: static;
+  float: none;
+}
+
+.colour-heading,
+.colour-options p {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  color: #aaa;
+}
+
+.colour-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.colour-option {
+  display: inline-block;
+  position: static;
+  padding: 10px 15px;
+  background: #eee;
+  color: #111;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.colour-option:hover {
+  background: #ccc;
+}
+
+.colour-option.selected {
+  background: white;
+  color: black;
+  border: 2px solid #888;
+  font-weight: bold;
+}
+
+/* ADD TO BAG */
+
+.add-bag-button {
+  width: 100%;
+  display: block;
+  margin-top: 8px;
+  padding: 14px;
+  background: white;
+  color: black;
+  border: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.add-bag-button:hover {
+  background: #ccc;
+}
+
+/* SHOPPING BAG */
+
+#cart {
+  position: fixed;
+  top: 130px;
+  right: 20px;
+  z-index: 1000;
+  padding: 13px 18px;
+  background: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#bag-items {
+  display: none;
+  position: fixed;
+  top: 185px;
+  right: 20px;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: #171717;
+  color: white;
+  border: 1px solid #555;
+  z-index: 999;
+}
+
+#bag-items h3 {
+  margin-bottom: 18px;
+}
+
+.bag-item {
+  padding: 13px 0;
+  border-bottom: 1px solid #444;
+}
+
+.bag-item p {
+  margin-bottom: 8px;
+}
+
+.remove-btn {
+  padding: 7px 12px;
+  background: #444;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.checkout-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px;
+  background: white;
+  color: black;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* NOTIFICATION */
+
+#message {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 22px;
+  background: white;
+  color: black;
+  z-index: 2000;
+  text-align: center;
+}
+
+/* FOOTER */
+
+footer {
+  padding: 40px 7%;
+  text-align: center;
+  background: #111;
+  border-top: 1px solid #292929;
+  color: #aaa;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 768px) {
+  header {
+    padding: 18px 5%;
+    flex-wrap: wrap;
+    gap: 15px;
   }
-];
 
-let cart = [];
-let selectedColours = {};
-
-const products = document.getElementById("products");
-
-// DISPLAY PRODUCTS
-function displayProducts() {
-  products.innerHTML = "";
-
-  items.forEach((item, index) => {
-    const product = document.createElement("div");
-    product.className = "product";
-
-    product.innerHTML = `
-      ${item.image
-        ? `<img src="${item.image}" alt="${item.name}">`
-        : `<div class="product-placeholder">${item.name}</div>`
-      }
-
-      <h3>${item.name}</h3>
-
-      <p>KSh ${item.price.toLocaleString()}</p>
-
-      <div class="colour-options">
-        ${item.colours.length ? `
-          <p class="colour-heading">AVAILABLE COLOURS</p>
-
-          <div class="colour-list">
-            ${item.colours.map(colour => `
-              <button
-                type="button"
-                class="colour-option ${
-                  selectedColours[index] === colour ? "selected" : ""
-                }"
-                data-product="${index}"
-                data-colour="${colour}">
-                ${colour}
-              </button>
-            `).join("")}
-          </div>
-        ` : ""}
-      </div>
-
-      <button class="add-bag-button" data-add="${index}">
-        ADD TO BAG
-      </button>
-    `;
-
-    products.appendChild(product);
-  });
-}
-
-// SELECT COLOUR
-products.addEventListener("click", function(event) {
-  const colourButton = event.target.closest(".colour-option");
-
-  if (colourButton) {
-    const index = colourButton.dataset.product;
-    const colour = colourButton.dataset.colour;
-
-    selectedColours[index] = colour;
-    displayProducts();
-    return;
+  nav {
+    gap: 13px;
+    flex-wrap: wrap;
   }
 
-  const addButton = event.target.closest(".add-bag-button");
-
-  if (addButton) {
-    addToCart(Number(addButton.dataset.add));
-  }
-});
-
-// BAG COUNT
-function updateCount() {
-  const count = document.getElementById("count");
-  if (count) count.textContent = cart.length;
-}
-
-// ADD TO BAG
-function addToCart(index) {
-  const item = items[index];
-
-  if (item.colours.length && !selectedColours[index]) {
-    showMessage("Please select a colour first!");
-    return;
+  nav a {
+    font-size: 11px;
   }
 
-  cart.push({
-    ...item,
-    selectedColour: selectedColours[index] || ""
-  });
+  #products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+  }
 
-  updateCount();
-  showMessage(item.name + " added to bag!");
-}
+  #shop {
+    padding: 45px 4%;
+  }
 
-// OPEN BAG
-function showBag() {
-  const box = document.getElementById("bag-items");
+  .product {
+    padding: 10px;
+  }
 
-  if (box.style.display === "block") {
-    box.style.display = "none";
-  } else {
-    box.style.display = "block";
-    renderBag();
+  .product h3 {
+    font-size: 15px;
+  }
+
+  .colour-option {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  #bag-items {
+    right: 10px;
+    width: 290px;
   }
 }
 
-// DISPLAY BAG
-function renderBag() {
-  const box = document.getElementById("bag-items");
-
-  if (cart.length === 0) {
-    box.innerHTML = `
-      <h3>YOUR BAG</h3>
-      <p>Your bag is empty!</p>
-    `;
-    return;
+@media (max-width: 400px) {
+  #products {
+    grid-template-columns: 1fr;
   }
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price, 0
-  );
-
-  box.innerHTML = `
-    <h3>YOUR BAG</h3>
-
-    ${cart.map((item, index) => `
-      <div class="bag-item">
-        <p>${item.name}</p>
-        ${item.selectedColour
-          ? `<p>Colour: ${item.selectedColour}</p>`
-          : ""}
-        <p>KSh ${item.price.toLocaleString()}</p>
-
-        <button class="remove-btn"
-          onclick="removeItem(${index})">
-          REMOVE
-        </button>
-      </div>
-    `).join("")}
-
-    <h3>Total: KSh ${total.toLocaleString()}</h3>
-
-    <button class="checkout-btn" onclick="checkout()">
-      CHECKOUT WITH WHATSAPP
-    </button>
-  `;
 }
-
-// REMOVE ITEM
-function removeItem(index) {
-  cart.splice(index, 1);
-  updateCount();
-  renderBag();
-  showMessage("Item removed from bag!");
-}
-
-// WHATSAPP CHECKOUT
-function checkout() {
-  if (cart.length === 0) {
-    showMessage("Your bag is empty!");
-    return;
-  }
-
-  const summary = cart.map(item =>
-    item.name +
-    (item.selectedColour ? " - " + item.selectedColour : "") +
-    " - KSh " + item.price
-  ).join("\n");
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price, 0
-  );
-
-  const phone = "2547XXXXXXXX";
-
-  const message =
-    "Hello SAZZ! I want to order:\n" +
-    summary +
-    "\nTotal: KSh " + total;
-
-  window.open(
-    "https://wa.me/" + phone +
-    "?text=" + encodeURIComponent(message),
-    "_blank"
-  );
-}
-
-// NOTIFICATION
-function showMessage(text) {
-  const box = document.getElementById("message");
-
-  box.textContent = text;
-  box.style.display = "block";
-
-  setTimeout(() => {
-    box.style.display = "none";
-  }, 2500);
-}
-
-// START
-displayProducts();
-updateCount();
