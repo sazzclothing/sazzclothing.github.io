@@ -1,5 +1,5 @@
 
- const items = [
+const items = [
   {
     name: "Cap",
     price: 800,
@@ -10,90 +10,137 @@
     name: "Crop Top",
     price: 700,
     image: "https://github.com/kagarijr/sazz-product-images/blob/main/Crop-top.jpg?raw=true",
-    colours: [
-      { name: "Grey", image: "" }
-    ]
+    colours: ["Grey"]
   },
   {
     name: "T-Shirt",
     price: 850,
     image: "",
-    colours: [
-      { name: "Brown", image: "" },
-      { name: "Grey", image: "" }
-    ]
+    colours: ["Brown", "Grey"]
   },
   {
     name: "Short",
     price: 700,
     image: "",
-    colours: [
-      { name: "Brown", image: "" },
-      { name: "Grey", image: "" }
-    ]
+    colours: ["Brown", "Grey"]
   },
   {
     name: "Sweatpant",
     price: 1200,
     image: "https://github.com/kagarijr/sazz-product-images/blob/main/Sweatpant.jpg?raw=true",
-    colours: [
-      { name: "Black", image: "" },
-      { name: "Charcoal Grey", image: "" },
-      { name: "Pink", image: "" }
-    ]
+    colours: ["Black", "Charcoal Grey", "Pink"]
   },
   {
     name: "Hoodie",
     price: 1500,
     image: "https://github.com/kagarijr/sazz-product-images/blob/main/Hoodie.jpg?raw=true",
-    colours: [
-      { name: "Grey", image: "" },
-      { name: "Pink", image: "" }
-    ]
+    colours: ["Grey", "Pink"]
   },
   {
     name: "Two-Piece",
     price: 2100,
     image: "https://github.com/kagarijr/sazz-product-images/blob/main/Two-piece.jpg?raw=true",
-    colours: [
-      { name: "Grey", image: "" },
-      { name: "Pink", image: "" }
-    ]
+    colours: ["Grey", "Pink"]
   }
 ];
 
-
 let cart = [];
+let selectedColours = {};
 
 const products = document.getElementById("products");
 
-// Display products
-items.forEach((item, index) => {
-  products.innerHTML += `
-    <div class="product">
-      <img src="${item.image}" alt="${item.name}">
+// DISPLAY PRODUCTS
+function displayProducts() {
+  products.innerHTML = "";
+
+  items.forEach((item, index) => {
+    const product = document.createElement("div");
+    product.className = "product";
+
+    product.innerHTML = `
+      ${item.image
+        ? `<img src="${item.image}" alt="${item.name}">`
+        : `<div class="product-placeholder">${item.name}</div>`
+      }
+
       <h3>${item.name}</h3>
+
       <p>KSh ${item.price.toLocaleString()}</p>
-      <button onclick="addToCart(${index})">
+
+      <div class="colour-options">
+        ${item.colours.length ? `
+          <p class="colour-heading">AVAILABLE COLOURS</p>
+
+          <div class="colour-list">
+            ${item.colours.map(colour => `
+              <button
+                type="button"
+                class="colour-option ${
+                  selectedColours[index] === colour ? "selected" : ""
+                }"
+                data-product="${index}"
+                data-colour="${colour}">
+                ${colour}
+              </button>
+            `).join("")}
+          </div>
+        ` : ""}
+      </div>
+
+      <button class="add-bag-button" data-add="${index}">
         ADD TO BAG
       </button>
-    </div>
-  `;
+    `;
+
+    products.appendChild(product);
+  });
+}
+
+// SELECT COLOUR
+products.addEventListener("click", function(event) {
+  const colourButton = event.target.closest(".colour-option");
+
+  if (colourButton) {
+    const index = colourButton.dataset.product;
+    const colour = colourButton.dataset.colour;
+
+    selectedColours[index] = colour;
+    displayProducts();
+    return;
+  }
+
+  const addButton = event.target.closest(".add-bag-button");
+
+  if (addButton) {
+    addToCart(Number(addButton.dataset.add));
+  }
 });
 
-// Update bag count
+// BAG COUNT
 function updateCount() {
-  document.getElementById("count").textContent = cart.length;
+  const count = document.getElementById("count");
+  if (count) count.textContent = cart.length;
 }
 
-// Add product
+// ADD TO BAG
 function addToCart(index) {
-  cart.push(items[index]);
+  const item = items[index];
+
+  if (item.colours.length && !selectedColours[index]) {
+    showMessage("Please select a colour first!");
+    return;
+  }
+
+  cart.push({
+    ...item,
+    selectedColour: selectedColours[index] || ""
+  });
+
   updateCount();
-  showMessage(items[index].name + " added to bag!");
+  showMessage(item.name + " added to bag!");
 }
 
-// Open and close bag
+// OPEN BAG
 function showBag() {
   const box = document.getElementById("bag-items");
 
@@ -105,7 +152,7 @@ function showBag() {
   }
 }
 
-// Display bag contents
+// DISPLAY BAG
 function renderBag() {
   const box = document.getElementById("bag-items");
 
@@ -127,6 +174,9 @@ function renderBag() {
     ${cart.map((item, index) => `
       <div class="bag-item">
         <p>${item.name}</p>
+        ${item.selectedColour
+          ? `<p>Colour: ${item.selectedColour}</p>`
+          : ""}
         <p>KSh ${item.price.toLocaleString()}</p>
 
         <button class="remove-btn"
@@ -144,7 +194,7 @@ function renderBag() {
   `;
 }
 
-// Remove product
+// REMOVE ITEM
 function removeItem(index) {
   cart.splice(index, 1);
   updateCount();
@@ -152,7 +202,7 @@ function removeItem(index) {
   showMessage("Item removed from bag!");
 }
 
-// WhatsApp checkout
+// WHATSAPP CHECKOUT
 function checkout() {
   if (cart.length === 0) {
     showMessage("Your bag is empty!");
@@ -160,19 +210,21 @@ function checkout() {
   }
 
   const summary = cart.map(item =>
-    item.name + " - KSh " + item.price
+    item.name +
+    (item.selectedColour ? " - " + item.selectedColour : "") +
+    " - KSh " + item.price
   ).join("\n");
 
   const total = cart.reduce(
     (sum, item) => sum + item.price, 0
   );
 
-  // Replace with your approved business WhatsApp number
   const phone = "2547XXXXXXXX";
 
   const message =
     "Hello SAZZ! I want to order:\n" +
-    summary + "\nTotal: KSh " + total;
+    summary +
+    "\nTotal: KSh " + total;
 
   window.open(
     "https://wa.me/" + phone +
@@ -181,7 +233,7 @@ function checkout() {
   );
 }
 
-// Notification
+// NOTIFICATION
 function showMessage(text) {
   const box = document.getElementById("message");
 
@@ -192,3 +244,7 @@ function showMessage(text) {
     box.style.display = "none";
   }, 2500);
 }
+
+// START
+displayProducts();
+updateCount();
