@@ -141,6 +141,7 @@ function addToCart(index) {
 }
 
 // OPEN BAG
+
 function showBag() {
   const box = document.getElementById("bag-items");
 
@@ -152,7 +153,6 @@ function showBag() {
   }
 }
 
-// DISPLAY BAG
 function renderBag() {
   const box = document.getElementById("bag-items");
 
@@ -160,84 +160,46 @@ function renderBag() {
     box.innerHTML = `
       <h3>YOUR BAG</h3>
       <p>Your bag is empty!</p>
+      <button onclick="showBag()">CLOSE</button>
     `;
     return;
   }
 
-  const total = cart.reduce(
-    (sum, item) => sum + item.price, 0
-  );
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   box.innerHTML = `
-    <h3>YOUR BAG</h3>
+    <h3>YOUR BAG (${cart.length})</h3>
 
     ${cart.map((item, index) => `
       <div class="bag-item">
-        <p>${item.name}</p>
-        ${item.selectedColour
-          ? `<p>Colour: ${item.selectedColour}</p>`
-          : ""}
+        <h4>${item.name}</h4>
+        <p>Colour: ${item.selectedColour || "Not selected"}</p>
         <p>KSh ${item.price.toLocaleString()}</p>
-
-        <button class="remove-btn"
-          onclick="removeItem(${index})">
+        <button onclick="removeItem(${index})">
           REMOVE
         </button>
       </div>
     `).join("")}
 
-    <h3>Total: KSh ${total.toLocaleString()}</h3>
-
-    <button class="checkout-btn" onclick="checkout()">
-      CHECKOUT WITH WHATSAPP
-    </button>
+    <h3>TOTAL: KSh ${total.toLocaleString()}</h3>
+    <button onclick="checkout()">CHECKOUT</button>
+    <button onclick="showBag()">CLOSE BAG</button>
   `;
 }
 
-// REMOVE ITEM
 function removeItem(index) {
   cart.splice(index, 1);
-  updateCount();
+
+  document.getElementById("count").textContent = cart.length;
+
   renderBag();
-  showMessage("Item removed from bag!");
+  showMessage("Item removed from your bag!");
 }
 
-// WHATSAPP CHECKOUT
-function checkout() {
-  if (cart.length === 0) {
-    showMessage("Your bag is empty!");
-    return;
-  }
-
-  const summary = cart.map(item =>
-    item.name +
-    (item.selectedColour ? " - " + item.selectedColour : "") +
-    " - KSh " + item.price
-  ).join("\n");
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price, 0
-  );
-
-  const phone = "2547XXXXXXXX";
-
-  const message =
-    "Hello SAZZ! I want to order:\n" +
-    summary +
-    "\nTotal: KSh " + total;
-
-  window.open(
-    "https://wa.me/" + phone +
-    "?text=" + encodeURIComponent(message),
-    "_blank"
-  );
-}
-
-// NOTIFICATION
-function showMessage(text) {
+function showMessage(message) {
   const box = document.getElementById("message");
 
-  box.textContent = text;
+  box.textContent = message;
   box.style.display = "block";
 
   setTimeout(() => {
