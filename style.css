@@ -223,16 +223,12 @@ nav a:hover {
 /* SHOPPING BAG */
 
 #cart {
-  position: absolute;
-  top: 130px;
-  right: 20px;
-  z-index: 1000;
-  padding: 13px 18px;
-  background: white;
-  color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+  position: absolute !important;
+  top: 130px !important;
+  right: 20px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 10000 !important;
 }
 
 #bag-items {
