@@ -16,13 +16,13 @@ const items = [
     name: "T-Shirt",
     price: 850,
     image: "",
-    colours: ["Brown", "Grey"]
+    colours: ["Black"]
   },
   {
     name: "Short",
     price: 700,
     image: "",
-    colours: ["Brown", "Grey"]
+    colours: ["Black"]
   },
   {
     name: "Sweatpant",
