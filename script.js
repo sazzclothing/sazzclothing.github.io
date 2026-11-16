@@ -15,13 +15,13 @@ const items = [
   {
     name: "T-Shirt",
     price: 850,
-    image: "",
+    image: "https://github.com/sazzclothing/sazzclothing.github.io/blob/main/Shirt.jpg?raw=true",
     colours: ["Black"]
   },
   {
     name: "Short",
     price: 700,
-    image: "",
+    image: "https://github.com/sazzclothing/sazzclothing.github.io/blob/main/Short.jpg?raw=true",
     colours: ["Black"]
   },
   {
